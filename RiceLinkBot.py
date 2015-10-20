@@ -1,8 +1,10 @@
 import argparse, os, time, urlparse, random, ctypes
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
-
+from selenium.webdriver.common.by import By
 
 def getApplyButtons(page): #passing in the url of the jobs page, this takes all the urls for the apply buttons and adds them to applyBtns array
 	applyBtns = []
@@ -35,11 +37,11 @@ def ViewBot(browser):
 					browser.get(applyButton)
 					time.sleep(random.uniform(1,1.2))
 					try:
-						finalApplyBtn = WebDriverWait(browser, 10).until(EC.presence_of_element_located(By.name, 'dnf_opt_submit') 
-					
+						finalApplyBtn = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.NAME, 'dnf_opt_submit'))) 				
+						finalApplyBtn.click()
 					finally:
 						browser.get("https://rice-csm.symplicity.com/students/index.php?s=jobs&ss=jobs&mode=list")#returning browser to job page
-					finalApplyBtn.click()	
+					
 
 		else: #give an alert to the user that no applybtns can be found, and they need to refine their search.
 			ctypes.windll.user32.MessageBoxA(0, "Not seeing any Apply Buttons, try refining your search.", "Oops!")
