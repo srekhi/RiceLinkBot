@@ -34,10 +34,12 @@ def ViewBot(browser):
 					visited[ID]=1
 					browser.get(applyButton)
 					time.sleep(random.uniform(1,1.2))
-					finalApplyBtn = browser.find_element_by_name('dnf_opt_submit').click()
-					finalApplyBtn.click() #logic for what happens on the actual job page
-					browser.get("https://rice-csm.symplicity.com/students/index.php?s=jobs&ss=jobs&mode=list")#returning browser to job page
-		
+					try:
+						finalApplyBtn = WebDriverWait(browser, 10).until(EC.presence_of_element_located(By.name, 'dnf_opt_submit') 
+					
+					finally:
+						browser.get("https://rice-csm.symplicity.com/students/index.php?s=jobs&ss=jobs&mode=list")#returning browser to job page
+					finalApplyBtn.click()	
 
 		else: #give an alert to the user that no applybtns can be found, and they need to refine their search.
 			ctypes.windll.user32.MessageBoxA(0, "Not seeing any Apply Buttons, try refining your search.", "Oops!")
