@@ -1,1 +1,1 @@
-Python script to automate the process of applying to jobs through Rice University's career network
+Python script to automate the process of applying to jobs through Rice University's career network. Uses Selenium and BeautifulSoup4.
